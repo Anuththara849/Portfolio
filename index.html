@@ -129,21 +129,15 @@
   <p><i class="fab fa-github"></i> <strong>GitHub:</strong> <a href="https://github.com/Anuththara849" target="_blank">github.com/Anuththara849</a></p>
   <p><i class="fab fa-linkedin"></i> <strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/anuththara-jayasinghe-282999359/" target="_blank">https://www.linkedin.com/in/anuththara-jayasinghe-282999359/</a></p>
 </div>
-
-
-  <form class="contact-form">
-      <form
-  action="https://formspree.io/f/xwpqylpa"
-  method="POST"
->
-    <div class="row">
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
-    </div>
-    <input type="text" placeholder="Subject" required>
-    <textarea placeholder="Your Message" rows="5" required></textarea>
-    <button type="submit">Send Message</button>
-  </form>
+<form class="contact-form" action="https://formspree.io/f/xwpqylpa" method="POST">
+  <div class="row">
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="email" name="email" placeholder="Your Email" required>
+  </div>
+  <input type="text" name="subject" placeholder="Subject" required>
+  <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+  <button type="submit">Send Message</button>
+</form>
 </div>
   </section>
 
@@ -155,6 +149,7 @@
     <script src="script.js"></script>
 </body>
 </html>
+
 
 
 
