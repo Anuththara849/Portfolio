@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anuththara Jayasinghe</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    :root {
+      --primary-color: #6c63ff;
+      --secondary-color: #f39c12;
+      --dark-color: #2a2a2a;
+      --light-color: #f4f4f4;
+      --text-color: #444;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: #fff;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+      color: var(--dark-color);
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section {
+      padding: 80px 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--primary-color);
+      border-radius: 2px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: var(--primary-color);
+      color: #fff;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #5752d4;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    .btn-outline:hover {
+      background: var(--primary-color);
+      color: #fff;
+    }
+
+    /* Header - Fixed position */
+    header {
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    /* Add a class for when scrolled */
+    header.scrolled {
+      padding: 10px 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      transition: padding 0.3s ease;
+    }
+
+    header.scrolled nav {
+      padding: 5px 0;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+
+    .nav-links li {
+      margin-left: 30px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark-color);
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary-color);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--primary-color);
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+      margin-left: 30px;
+    }
+
+    .social-icons a {
+      color: var(--dark-color);
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: var(--primary-color);
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+   
+
+    /* Home Section */
+    #home {
+      padding: 150px 0 100px;
+      background: linear-gradient(135deg, #f5f7ff 0%, #e8ecff 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .home-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .home-text {
+      flex: 1;
+      min-width: 300px;
+      padding-right: 30px;
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .home-text.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .home-text .greeting {
+      font-size: 1.2rem;
+      color: var(--primary-color);
+      margin-bottom: 10px;
+    }
+
+    .home-text h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      color: var(--dark-color);
+    }
+
+    .home-text h1 span {
+      color: var(--primary-color);
+    }
+
+    .home-text .title {
+      font-size: 1.8rem;
+      margin-bottom: 30px;
+      color: #555;
+    }
+
+    .home-buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .home-image {
+      flex: 1;
+      min-width: 300px;
+      text-align: center;
+      position: relative;
+      opacity: 0;
+      transform: translateX(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .home-image.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .home-image img {
+      max-width: 100%;
+      border-radius: 50%;
+      border: 5px solid transparent;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      width: 380px;
+      height: 380px;
+      object-fit: cover;
+      animation: borderAnimation 3s infinite;
+    }
+
+    @keyframes borderAnimation {
+      0% {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0 rgba(108, 99, 255, 0.7);
+      }
+      50% {
+        border-color: #f39c12;
+        box-shadow: 0 0 0 10px rgba(243, 156, 18, 0);
+      }
+      100% {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0 rgba(108, 99, 255, 0);
+      }
+    }
+
+    /* About Section */
+    #about {
+      background: #fff;
+    }
+
+    .about-content {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .about-text p {
+      margin-bottom: 20px;
+      color: #555;
+      line-height: 1.8;
+      text-align: center;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .about-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      background: #f9f9f9;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .detail-item {
+      flex: 1 1 45%;
+      display: flex;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .detail-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .detail-item i {
+      color: var(--primary-color);
+      margin-right: 10px;
+      font-size: 1.2rem;
+      width: 25px;
+    }
+
+    /* Skills inside About */
+    .skills-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .skill-category {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .skill-category.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .skill-category h3 {
+      margin-bottom: 20px;
+      text-align: center;
+      color: var(--primary-color);
+    }
+
+    .skill-item {
+      margin-bottom: 20px;
+    }
+
+    .skill-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .skill-bar {
+      height: 10px;
+      background: #e9e9e9;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .skill-progress {
+      height: 100%;
+      background: var(--primary-color);
+      border-radius: 10px;
+      width: 0; /* Start collapsed */
+      transition: width 2s ease;
+    }
+
+    /* Services Section */
+    #services {
+      background: #f9f9f9;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .service-card {
+      background: #fff;
+      padding: 40px 30px;
+      border-radius: 10px;
+      border: 2px solid #5752d4;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .service-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      border-color: #5d50d66b;
+    }
+
+    .service-card i {
+      font-size: 3rem;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+      margin-bottom: 15px;
+    }
+
+    /* Projects Section - Fixed */
+    .projects-container {
+      padding: 20px 0;
+    }
+
+    .swiper {
+      width: 100%;
+      padding: 30px 0 50px;
+    }
+
+    .swiper-slide {
+      width: 300px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .card-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      height: 400px;
+    }
+
+    .card-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border: 3px solid var(--primary-color);
+    }
+
+    .card-details {
+      text-align: center;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      color: var(--dark-color);
+    }
+
+    .card-description {
+      margin-bottom: 15px;
+      color: #666;
+      flex-grow: 1;
+    }
+
+    .card-button {
+      padding: 10px 20px;
+      background: var(--primary-color);
+      text-decoration: none;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .card-button:hover {
+      background: #5752d4;
+    }
+
+    .swiper-pagination-bullet-active {
+      background: var(--primary-color) !important;
+    }
+
+    .swiper-button-next, 
+    .swiper-button-prev {
+      color: var(--primary-color) !important;
+    }
+
+    /* Contact Section - Updated */
+    #contact {
+            background: #f9f9f9;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .contact-info {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .contact-info.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .contact-info h3 {
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        .contact-info .divider {
+            height: 2px;
+            background: #eee;
+            margin: 25px 0;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .contact-detail.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .contact-detail i {
+            color: var(--primary-color);
+            margin-right: 15px;
+            font-size: 1.5rem;
+            width: 30px;
+            text-align: center;
+        }
+
+        .contact-detail-content h4 {
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+
+        .contact-detail-content p {
+            margin-bottom: 0;
+            color: #666;
+        }
+
+        .contact-form {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .contact-form.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .contact-form h3 {
+            margin-bottom: 20px;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .form-message {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            display: none;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+
+    /* Footer */
+    footer {
+      background: var(--dark-color);
+      color: #fff;
+      padding: 30px 0;
+      text-align: center;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .home-text h1 {
+        font-size: 2.8rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+      
+      .nav-links {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: #fff;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+      
+      .nav-links.active {
+        left: 0;
+      }
+      
+      .nav-links li {
+        margin: 15px 0;
+      }
+      
+      .social-icons {
+        display: none;
+      }
+      
+      .home-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .home-text {
+        padding-right: 0;
+        margin-bottom: 40px;
+      }
+      
+      .home-text h1 {
+        font-size: 2.5rem;
+      }
+      
+      .home-text .title {
+        font-size: 1.5rem;
+      }
+      
+      .home-buttons {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .home-image img {
+        width: 280px;
+        height: 280px;
+      }
+      
+      .detail-item {
+        flex: 1 1 100%;
+      }
+      
+      .swiper {
+        padding: 30px 0 70px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header id="header">
+    <div class="container">
+      <nav>
+        <div class="logo">ADJ</div>
+        <div class="menu-toggle" id="menuToggle">
+          <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#services" class="nav-link">Services</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="social-icons">
+          <a href="https://github.com/Anuththara849"><i class="fab fa-github"></i></a>
+          <a href="https://linkedin.com/in/anuththara-jayasinghe-282999359"><i class="fab fa-linkedin"></i></a>
+          <a href="https://www.behance.net/anuththdevindi"><i class="fab fa-behance"></i></a>
+          <a href="mailto:anuththarajayasinghe71@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Home -->
+  <section id="home" class="section">
+    <div class="container">
+      <div class="home-content">
+        <div class="home-text">
+          <div class="greeting">Hello, it's Me</div>
+          <h1>ANUTHTHARA <span>JAYASINGHE</span></h1>
+          <div class="title">I'm a UI/UX Designer & Web Developer</div>
+          <div class="home-buttons">
+            <a href="#about" class="btn">ABOUT ME</a>
+            <a href="Anuththara-Jayasinghe-Resume.pdf" download class="btn btn-outline">DOWNLOAD CV</a>
+
+          </div>
+        </div>
+        <div class="home-image">
+          <!-- Placeholder for your photo - replace with your actual image -->
+          <img src="your-photo.jpg" alt="Anuththara Jayasinghe">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>Hi,👋 I'm Anuththara Jayasinghe, an HNDIT student at Sri Lanka Institute of Advanced Technological Education (SLIATE)🎓, passionate about exploring the world of Information Technology.</p> 
+          <p>I enjoy learning and working with areas such as web development, programming, databases, and networking.</p>
+          <p>My academic journey has helped me gain a solid foundation in Java, HTML, CSS, JavaScript, and SQL, and I am constantly improving my skills through projects and self-learning.</p>
+          <p>🚀I'm interested in becoming a Web Developer in the future, while also exploring opportunities in UI/UX design, software engineering, Front-end Development, Back-end Development, Full stack developer and IT project Management.</p>
+           <p>Outside academics, I love solving problems, experimenting with new technologies, and building creative solutions that make life easier.</p>
+        </div>
+
+        <div class="about-details">
+          <div class="detail-item"><i class="fas fa-birthday-cake"></i><span><strong>Birthday:</strong> 26 Nov 2002</span></div>
+          <div class="detail-item"><i class="fas fa-phone"></i><span><strong>Phone:</strong> +94766904867</span></div>
+          <div class="detail-item"><i class="fas fa-map-marker-alt"></i><span><strong>City:</strong> Dambulla</span></div>
+          <div class="detail-item"><i class="fas fa-user"></i><span><strong>Age:</strong> 23</span></div>
+          <div class="detail-item"><i class="fas fa-graduation-cap"></i><span><strong>Diploma:</strong> HND IT</span></div>
+          <div class="detail-item"><i class="fas fa-envelope"></i><span><strong>Email:</strong> anuththarajayasinghe71@gmail.com</span></div>
+        </div>
+
+        <!-- Skills Merged Here -->
+        <h2 class="section-title">My Skills</h2>
+        <div class="skills-container">
+          <div class="skill-category">
+            <h3>Technical</h3>
+            <div class="skill-item">
+              <div class="skill-info"><span>HTML</span><span>100%</span></div>
+              <div class="skill-bar"><div class="skill-progress" data-progress="100"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span>CSS</span><span>90%</span></div>
+              <div class="skill-bar"><div class="skill-progress" data-progress="90"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span>PHP</span><span>80%</span></div>
+              <div class="skill-bar"><div class="skill-progress" data-progress="80"></div></div>
+            </div>
+          </div>
+
+          <div class="skill-category">
+            <h3>Development</h3>
+            <div class="skill-item">
+              <div class="skill-info"><span>SQL</span><span>60%</span></div>
+              <div class="skill-bar"><div class="skill-progress" data-progress="60"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span>Java</span><span>70%</span></div>
+              <div class="skill-bar"><div class="skill-progress" data-progress="70"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span>Figma</span><span>75%</span></div>
+              <div class="skill-bar"><div class="skill-progress" data-progress="75"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="section">
+    <div class="container">
+      <h2 class="section-title">Services</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <i class="fas fa-pencil-ruler"></i>
+          <h3>UI/UX Designing</h3>
+          <p>UI/UX design seeks to build intuitive and accessible experiences that empower users to achieve their goals effortlessly while maintaining consistency across platforms.</p><p>Technologies like Figma & Adobe xd</p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-code"></i>
+          <h3>Web Development</h3>
+          <p>Front-end development ensures that digital products are responsive, accessible, and optimized for seamless performance across different devices and browsers.</p><p>Technologies like HTML, CSS, and JavaScript.</p>
+        </div>
+        <div class="service-card">
+          <i class="fas fa-laptop-code"></i>
+          <h3>Java Application Development</h3>
+          <p>Creating software using Java for desktop applications, enterprise systems, and backend services.</p>
+          <p>Tools & Frameworks: JavaFX (GUI), JDBC (Database Access), MySQL(DB), NetBeans / IntelliJ IDEA (IDE)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="section">
+    <div class="container">
+      <h2 class="section-title">My Projects</h2>
+      <div class="projects-container">
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            
+            <div class="swiper-slide">
+              <div class="card-item">
+                <img src="Plant.png" alt="Web Project" class="card-image" />
+                <div class="card-details">
+                  <h3 class="card-title">Aruna Plant Store</h3>
+                  <p class="card-description">A responsive web application built with modern technologies including HTML, CSS, JavaScript and PHP.</p>
+                  <a href="https://github.com/Anuththara849/Online-plant-selling-system/tree/main/Online%20plant%20selling%20system" target="_blank" class="card-button">View Project</a>
+
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card-item">
+                <img src="Artisan craft.png" alt="UI Design" class="card-image" />
+                <div class="card-details">
+                  <h3 class="card-title">Artisan Craft Online Market place</h3>
+                  <p class="card-description">User interface design for a mobile application focusing on usability and aesthetic appeal.</p>
+                  <a href="https://github.com/Anuththara849/Artisan-craft-online-marketplace-handmade-goods" target="_blank" class="card-button">View Project</a>
+
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card-item">
+                <img src="PMC.png" alt="Java Application" class="card-image" />
+                <div class="card-details">
+                  <h3 class="card-title">Java Application</h3>
+                  <p class="card-description">A desktop application developed with Java and JavaFX for efficient data management.</p>
+                  <a href="https://github.com/Anuththara849/Pharmacy-Management-System" target="_blank" class="card-button">View Project</a>
+
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card-item">
+                <img src="Food Ordering App.png" alt="Food ordering" class="card-image" />
+                <div class="card-details">
+                  <h3 class="card-title">Food Ordering System App UI Design</h3>
+                  <p class="card-description">Clean and modern Figma design for food services</p>
+                  <a href="https://www.behance.net/gallery/232739619/Food-Ordering-App" target="_blank" class="card-button">View Project</a>
+
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card-item">
+                <img src="Plants Ui Design.png" alt="E-Commerce" class="card-image" />
+                <div class="card-details">
+                  <h3 class="card-title">Find Plants App UI Design</h3>
+                  <p class="card-description">Figma UI design for browsing and ordering plant easily.</p>
+                  <a href="https://www.behance.net/gallery/232763805/Find-Plant-shop" target="_blank" class="card-button">View Project</a>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card-item">
+                <img src="The flower shop.png" alt="flower" class="card-image" />
+                <div class="card-details">
+                  <h3 class="card-title">The flower shop App UI Design</h3>
+                  <p class="card-description">Figma UI design for browsing and ordering flowers easily</p>
+                  <a href="https://www.behance.net/gallery/232742601/Flower-ordering-app" target="_blank" class="card-button">View Project</a>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card-item">
+                <img src="Beauty.png" alt="beauty" class="card-image" />
+                <div class="card-details">
+                  <h3 class="card-title">Beauty Product UI Design</h3>
+                  <p class="card-description">User-friendly Figma design for skincare & cosmetics.</p>
+                  <a href="https://www.behance.net/gallery/232738699/Skin-care-product" target="_blank" class="card-button">View Project</a>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card-item">
+                <img src="Task.jpeg" alt="finance" class="card-image" />
+                <div class="card-details">
+                  <h3 class="card-title">Finance App UI Design</h3>
+                  <p class="card-description">Clean and modern mobile UI for personal finance management.</p>
+                  <a href="https://www.behance.net/gallery/234909595/Finance-Banking-app" target="_blank" class="card-button">View Project</a>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card-item">
+                <img src="event.png" alt="bookings" class="card-image" />
+                <div class="card-details">
+                  <h3 class="card-title">Event Booking and Management App</h3>
+                  <p class="card-description">Mobile UI crafted in Figma for hassle-free bookings.</p>
+                  <a href="https://www.behance.net/gallery/234628929/Event-Booking-and-Management-App" target="_blank" class="card-button">View Project</a>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card-item">
+                <img src="Hotel recipe template.png" alt="hotel" class="card-image" />
+                <div class="card-details">
+                  <h3 class="card-title">Hotel recipe UI Design</h3>
+                  <p class="card-description">Stylish Figma design for recipe and menu presentation.</p>
+                  <a href="https://www.behance.net/gallery/232756831/Hotel-menu-food" target="_blank" class="card-button">View Project</a>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card-item">
+                <img src="Bubble Tea Shop.png" alt="Bubble" class="card-image" />
+                <div class="card-details">
+                  <h3 class="card-title">Bubble Tea Shop</h3>
+                  <p class="card-description">User-friendly interface for showcasing products and promotions.</p>
+                  <a href="https://github.com/Anuththara849/Bubble-Tea-Shop-" target="_blank" class="card-button">View Project</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+   <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Contact me</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get in touch</h3>
+                    <div class="divider"></div>
+                    
+                    <div class="contact-detail">
+                        <i class="fas fa-phone"></i>
+                        <div class="contact-detail-content">
+                            <h4>Call me</h4>
+                            <p>+94766904867</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-detail">
+                        <i class="fas fa-envelope"></i>
+                        <div class="contact-detail-content">
+                            <h4>E-mail</h4>
+                            <p>anuththarajayasinghe71@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-detail">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="contact-detail-content">
+                            <h4>Location</h4>
+                            <p>Dambulla, Sri Lanka</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Formspree form with your Formspree ID -->
+                <form class="contact-form" action="https://formspree.io/f/mwpngkqv" method="POST" id="contactForm">
+                    <h3>Send Your Message</h3>
+                    <input type="text" id="name" name="name" placeholder="Name" required>
+                    <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    <input type="text" id="subject" name="subject" placeholder="Subject" required>
+                    <textarea id="message" name="message" placeholder="Message" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                    <div id="formMessage" class="form-message"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 Anuththara Jayasinghe. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    // Form submission handling
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const formMessage = document.getElementById('formMessage');
+            
+            // Show loading state
+            submitBtn.innerHTML = 'Sending...';
+            submitBtn.disabled = true;
+            formMessage.style.display = 'none';
+            
+            // Form will be submitted to Formspree which will handle the email sending
+            // We'll just show a success message after a short delay to simulate the process
+            setTimeout(function() {
+                formMessage.textContent = 'Your message has been sent successfully!';
+                formMessage.className = 'form-message success';
+                formMessage.style.display = 'block';
+                
+                // Reset form
+                document.getElementById('contactForm').reset();
+                
+                // Reset button
+                submitBtn.innerHTML = 'Send Message';
+                submitBtn.disabled = false;
+            }, 1500);
+            
+            // In a real implementation, you would let Formspree handle the form submission
+            // and use their confirmation page or add a hidden iframe for AJAX-like behavior
+        });
+    // Initialize Swiper
+    const swiper = new Swiper('.mySwiper', {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+        640: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        992: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+        },
+      },
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    
+    menuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+    
+    // Close menu when clicking on a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+    
+    // Animate skill bars when visible
+    const skillBars = document.querySelectorAll('.skill-progress');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          const progress = entry.target.getAttribute('data-progress');
+          entry.target.style.width = progress + '%';
+        }
+      });
+    }, { threshold: 0.5 });
+
+    skillBars.forEach(bar => observer.observe(bar));
+    
+    // Animation on scroll for sections
+    const sections = document.querySelectorAll('.section');
+    const homeText = document.querySelector('.home-text');
+    const homeImage = document.querySelector('.home-image');
+    const detailItems = document.querySelectorAll('.detail-item');
+    const skillCategories = document.querySelectorAll('.skill-category');
+    const serviceCards = document.querySelectorAll('.service-card');
+    const contactInfo = document.querySelector('.contact-info');
+    const contactForm = document.querySelector('.contact-form');
+    const contactDetails = document.querySelectorAll('.contact-detail');
+    
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          
+          // Additional animations for specific elements within sections
+          if (entry.target.id === 'home') {
+            setTimeout(() => {
+              homeText.classList.add('visible');
+              homeImage.classList.add('visible');
+            }, 300);
+          }
+          
+          if (entry.target.id === 'about') {
+            detailItems.forEach((item, index) => {
+              setTimeout(() => {
+                item.classList.add('visible');
+              }, index * 100);
+            });
+            
+            skillCategories.forEach((category, index) => {
+              setTimeout(() => {
+                category.classList.add('visible');
+              }, index * 200);
+            });
+          }
+          
+          if (entry.target.id === 'services') {
+            serviceCards.forEach((card, index) => {
+              setTimeout(() => {
+                card.classList.add('visible');
+              }, index * 200);
+            });
+          }
+          
+          if (entry.target.id === 'contact') {
+            contactInfo.classList.add('visible');
+            contactForm.classList.add('visible');
+            
+            contactDetails.forEach((detail, index) => {
+              setTimeout(() => {
+                detail.classList.add('visible');
+              }, index * 150);
+            });
+          }
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    sections.forEach(section => {
+      sectionObserver.observe(section);
+    });
+
+    // Navbar scroll effect and active link highlighting
+    const header = document.getElementById('header');
+    const navLinksAll = document.querySelectorAll('.nav-link');
+    
+    window.addEventListener('scroll', () => {
+      // Add scrolled class to header when scrolling
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+      
+      // Highlight active menu item based on scroll position
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        
+        if (window.scrollY >= sectionTop - 200) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      navLinksAll.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').substring(1) === current) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
